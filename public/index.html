@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Uploader</title>
+</head>
+<body>
+  <h2>Uploader</h2>
+  <input type="file" id="file">
+  <button onclick="upload()">Upload</button>
+  <pre id="out"></pre>
+
+  <script>
+    async function upload() {
+      const f = document.getElementById('file').files[0]
+      if (!f) return alert('Pilih file')
+
+      const fd = new FormData()
+      fd.append('file', f)
+
+      const r = await fetch('/api/upload', {
+        method: 'POST',
+        body: fd
+      })
+
+      const j = await r.json()
+      document.getElementById('out').textContent = j.url
+    }
+  </script>
+</body>
+</html>
