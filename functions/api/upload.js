@@ -23,8 +23,5 @@ export async function onRequestPost({ request, env }) {
     time: Date.now()
   }))
 
-  return new Response(
-    JSON.stringify({ success: true, url }),
-    { headers: { 'Content-Type': 'application/json' } }
-  )
+  return Response.json({ success: true, url })
 }
